@@ -15,30 +15,63 @@
 # b.	(Pradnya, Melburne) - Yes
 # (Pavan, Vishal) - No
 
-# Python code to find common 
-# first element in list of tuple 
-
-# Function to solve the task 
-def find(Input): 
-	out = {} 
-	for elem in Input: 
-		try: 
-			out[elem[0]].extend(elem[1:]) 
-		except KeyError: 
-			out[elem[0]] = list(elem) 
-	return [tuple(values) for values in out.values()] 
-
-# List initialization 
-Input = [('x', 'y'), ('x', 'z'), ('w', 't')] 
-
-# Calling function 
-Output = (find(Input)) 
-
-# Printing 
-print("Initial list of tuple is :", Input) 
-print("List showing common first element", Output) 
+#Accepting the input from the user
+l1 =[]
+l2 =[]
+n = int(input("Enter the no of pairs"))
+for i in range(n):
+	for j in range(2):
+		name = input("Enter the element ")
+		l2.append(name)
+	l1.append(set(l2))
+	l2.clear()
+print ("Pairs are :", l1)
 
 
+# checking the intersection between two sets while looping through them, if there is an intersection, take the union and delete the other set
+l = n
+i=0
+while i < l-1:
+	j = i+1
+	while j < l:
+		c = l1[i].intersection(l1[j])
+		if (not len(c)  == 0):
+			d = l1[i].union(l1[j])
+			l1[i] = d
+			l1.remove(l1[j])
+			l = l-1 
+		else :
+			j = j+1
+	i = i+1
+	if i == l-1 :
+		c = l1[i].intersection(l1[i-1])
+		if (not len(c)  == 0):
+			d = l1[i].union(l1[i-1])
+			l1[i] = d
+			l1.remove(l1[i-1])
+			l = l-1 
+
+
+print("THe groups are ", l1)
+
+set1=set()
+n1 = input("Enter the relationship to check :\n enter the first name: ")
+set1.add(n1)
+n2 = input("Enter the second name ")
+set1.add(n2)
+
+#Looping through sets and checking if the intersection is 2 then they are related
+r = False
+for i in l1:
+	c = set1.intersection(i)
+	if ( len(c) == 2):
+		r = True
+		break
+
+if r == True:
+	print ("Yes, related")
+else:
+	print ("Not related")
 
 
 
@@ -46,34 +79,5 @@ print("List showing common first element", Output)
 
 
 
-
-
-
-
-
-
-# # Python code to find common first 
-# # element in list of tuple 
-
-# # Importing 
-# from collections import defaultdict 
-
-# # Function to solve the task 
-# def find(pairs): 
-# 	mapp = defaultdict(list) 
-# 	for x, y in pairs: 
-# 		mapp[x].append(y) 
-# 	return [(x, *y) for x, y in mapp.items()] 
-
-# # Input list initialization 
-# Input = [('p', 'q'), ('p', 'r'), 
-# 		('p', 's'), ('m', 't')] 
-
-# # calling function 
-# Output = find(Input) 
-
-# # Printing 
-# print("Initial list of tuple is :", Input) 
-# print("List showing common first element", Output) 
 
 
